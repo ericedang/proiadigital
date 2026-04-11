@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "System user profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["client", "admin"] }
+      },
+      "required": ["uid", "email"]
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "Scheduled diagnostic or service session",
+      "type": "object",
+      "properties": {
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "clientEmail": { "type": "string" },
+        "serviceType": { "type": "string" },
+        "startTime": { "type": "string", "format": "date-time" },
+        "endTime": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"] },
+        "notes": { "type": "string" }
+      },
+      "required": ["clientId", "startTime", "serviceType", "status"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Product or service purchase order",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "items": { "type": "array" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "paid", "later", "cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "items", "total", "paymentMethod", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/appointments/{appointmentId}": {
+      "schema": "Appointment",
+      "description": "Global appointments collection"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Global orders collection"
+    }
+  }
+}
+
+ 
