@@ -81,10 +81,10 @@ export const SocialLayoutContent = () => {
         <div className="px-4 py-2">
           <p className="text-xs font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 uppercase tracking-widest pl-4 mb-2">CM Virtuel IA</p>
           <div className="space-y-1">
-            <SidebarLink to="/social/ai-center" icon={BrainCircuit} label="Centre de Contrôle" color="bg-gradient-to-r from-amber-500/20 to-purple-500/20 text-amber-200 border border-amber-500/20" />
+            <SidebarLink to="/social/projects" icon={Users} label="Mes Projets" />
             <SidebarLink to="/social/ai-chat" icon={Bot} label="Console IA" />
-            <SidebarLink to="/social/clients" icon={Users} label="Mes Clients" />
-            <SidebarLink to="/social/onboarding" icon={Sparkles} label="Nouvel Onboarding" color="text-amber-400 hover:bg-amber-400/10" />
+            <SidebarLink to="/social/onboarding" icon={Sparkles} label="Nouveau Projet" color="text-amber-400 hover:bg-amber-400/10" />
+            <SidebarLink to="/social/ai-center" icon={BrainCircuit} label="Tableau de Bord IA" color="bg-gradient-to-r from-amber-500/20 to-purple-500/20 text-amber-200 border border-amber-500/20" />
           </div>
         </div>
 

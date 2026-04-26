@@ -1,12 +1,13 @@
 export interface SocialAccount {
   id: string;
-  platform: 'twitter' | 'linkedin' | 'instagram' | 'facebook';
-  username: string;
+  platform: 'instagram' | 'linkedin' | 'youtube' | 'twitter' | 'tiktok' | 'facebook';
+  handle: string;
   name: string;
+  status: 'connected' | 'expiring' | 'disconnected' | 'not_configured';
   followers: number;
-  avatar: string;
-  status: 'active' | 'expired' | 'error';
   lastSync: string;
+  avatar?: string;
+  details?: any;
 }
 
 export interface Client {
@@ -67,6 +68,40 @@ export interface Media {
   date: string;
 }
 
+export interface Project {
+  id: string;
+  name: string;
+  status: 'En cours' | 'Planifié' | 'Terminé' | 'En pause';
+  phase: number;
+  totalPhases: number;
+  phaseName: string;
+  durationDays: number;
+  contentCreated: number;
+  reach: string;
+  engagement: string;
+  conversion: string;
+  conversionGoal: string;
+  autonomyLevel: 0 | 1 | 2 | 3 | 4;
+  lastActivityText: string;
+  lastActivityTime: string;
+  unreadCount: number;
+}
+
+export const initialProjects: Project[] = [
+  { id: 'p1', name: 'Formation Productivité', status: 'En cours', phase: 3, totalPhases: 6, phaseName: 'Engagement', durationDays: 45, contentCreated: 127, reach: '850K', engagement: '4.2%', conversion: '23', conversionGoal: '30 inscr', autonomyLevel: 2, lastActivityText: '12 nouveaux commentaires', lastActivityTime: '09:45', unreadCount: 3 },
+  { id: 'p2', name: 'App Mobile FitTrack', status: 'En cours', phase: 2, totalPhases: 6, phaseName: 'Révélation', durationDays: 12, contentCreated: 48, reach: '320K', engagement: '5.8%', conversion: '1200', conversionGoal: 'DL', autonomyLevel: 3, lastActivityText: '3 nouveaux messages privés', lastActivityTime: '09:30', unreadCount: 1 },
+  { id: 'p4', name: 'Livre Blanc IA Éthique', status: 'Planifié', phase: 0, totalPhases: 6, phaseName: 'Teaser', durationDays: 0, contentCreated: 85, reach: '0', engagement: '0%', conversion: '0', conversionGoal: 'DL', autonomyLevel: 1, lastActivityText: 'En attente de validation', lastActivityTime: 'Hier', unreadCount: 0 },
+  { id: 'p3', name: 'Salon TechInnovate', status: 'Terminé', phase: 6, totalPhases: 6, phaseName: 'Récurrence', durationDays: 60, contentCreated: 210, reach: '1.2M', engagement: '3.9%', conversion: '450', conversionGoal: 'visiteurs (ROI 320%)', autonomyLevel: 3, lastActivityText: 'Projet terminé', lastActivityTime: '23/03', unreadCount: 0 },
+];
+
+export const initialAccounts: SocialAccount[] = [
+  { id: 'acc1', platform: 'instagram', handle: '@green_eats_officiel', name: 'GreenEats Officiel', status: 'connected', followers: 15200, lastSync: '09:45' },
+  { id: 'acc2', platform: 'linkedin', handle: 'greeneats-company', name: 'GreenEats Company', status: 'connected', followers: 3200, lastSync: '09:45' },
+  { id: 'acc3', platform: 'youtube', handle: 'greeneats-tv', name: 'GreenEats TV', status: 'connected', followers: 8500, lastSync: '09:44', details: { videos: 42 } },
+  { id: 'acc4', platform: 'twitter', handle: '@greeneats', name: 'GreenEats', status: 'expiring', followers: 5100, lastSync: '10:00' },
+  { id: 'acc5', platform: 'tiktok', handle: '@greeneats_viral', name: 'GreenEats Viral', status: 'disconnected', followers: 23000, lastSync: 'Il y a 3j' },
+];
+
 export const initialClients: Client[] = [
   { id: 'c1', name: 'TechInnovate', industry: 'SaaS / B2B', autonomyLevel: 85, aiStatus: 'active', aiMode: 'full_auto', confidenceScore: 92, avatar: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=100&q=80', activeCampaigns: 2, crisisLevel: 1 },
   { id: 'c2', name: 'GreenEats', industry: 'Food / B2C', autonomyLevel: 40, aiStatus: 'learning', aiMode: 'assisted', confidenceScore: 65, avatar: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=100&q=80', activeCampaigns: 1, crisisLevel: 2 },
@@ -86,12 +121,6 @@ export const initialLogs: IA_Log[] = [
   { id: 'l3', clientId: 'c3', action: 'Alerte: Baisse d\'engagement détectée (-15%). Suggestion de contenu requise.', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(), type: 'warning' },
   { id: 'l4', clientId: 'c1', action: 'Engagement: Réponse à 12 commentaires sur LinkedIn', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 3).toISOString(), type: 'engage' },
   { id: 'l5', clientId: 'c2', action: 'Veille: Nouvelle tendance "Vegan" détectée sur TikTok', timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(), type: 'analyze' },
-];
-
-export const initialAccounts: SocialAccount[] = [
-  { id: '1', platform: 'twitter', username: '@cabinetpro', name: 'Cabinet ProDigital', followers: 8452, avatar: 'https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=100&q=80', status: 'active', lastSync: new Date().toISOString() },
-  { id: '2', platform: 'linkedin', username: 'cabinet-prodigital', name: 'Cabinet ProDigital', followers: 3210, avatar: 'https://images.unsplash.com/photo-1556761175-129418cb210d?w=100&q=80', status: 'active', lastSync: new Date().toISOString() },
-  { id: '3', platform: 'instagram', username: 'prodigital_officiel', name: 'Cabinet ProDigital', followers: 15600, avatar: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=100&q=80', status: 'active', lastSync: new Date().toISOString() }
 ];
 
 export const initialPosts: Post[] = [
@@ -205,6 +234,7 @@ interface SocialContextType {
   tasks: IA_Task[];
   posts: Post[];
   media: Media[];
+  projects: Project[];
   isLiveMode: boolean;
   setIsLiveMode: (live: boolean) => void;
   addPost: (post: Omit<Post, 'id' | 'status' | 'metrics'> & { status?: string }) => void;
@@ -216,6 +246,7 @@ interface SocialContextType {
   addTask: (task: Omit<IA_Task, 'id' | 'progress'>) => void;
   updateTask: (id: string, updates: Partial<IA_Task>) => void;
   addAccount: (account: Omit<SocialAccount, 'id' | 'lastSync'>) => void;
+  updateProject: (id: string, updates: Partial<Project>) => void;
 }
 
 const SocialContext = createContext<SocialContextType | undefined>(undefined);
@@ -227,6 +258,7 @@ export const SocialProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [tasks, setTasks] = useState<IA_Task[]>(initialTasks);
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [media, setMedia] = useState<Media[]>(initialMedia);
+  const [projects, setProjects] = useState<Project[]>(initialProjects);
   const [isLiveMode, setIsLiveMode] = useState(false);
 
   const addAccount = (account: Omit<SocialAccount, 'id' | 'lastSync'>) => {
@@ -284,10 +316,14 @@ export const SocialProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     setTasks(prev => prev.map(t => t.id === id ? { ...t, ...updates } : t));
   };
 
+  const updateProject = (id: string, updates: Partial<Project>) => {
+    setProjects(prev => prev.map(p => p.id === id ? { ...p, ...updates } : p));
+  };
+
   return (
     <SocialContext.Provider value={{ 
-      accounts, clients, logs, tasks, posts, media, isLiveMode, setIsLiveMode, 
-      addPost, updatePost, deletePost, updateClient, addLog, updateLog, addTask, updateTask, addAccount 
+      accounts, clients, logs, tasks, posts, media, projects, isLiveMode, setIsLiveMode, 
+      addPost, updatePost, deletePost, updateClient, addLog, updateLog, addTask, updateTask, addAccount, updateProject 
     }}>
       {children}
     </SocialContext.Provider>
