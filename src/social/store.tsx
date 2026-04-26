@@ -196,8 +196,6 @@ export const platformColors = {
   facebook: '#1877F2'
 };
 
-// Global Store Hook (Simple implementation using useState & Context isn't needed if we pass as props or use simple context)
-// But for React simplicity we will create a lightweight context
 import React, { createContext, useContext, useState } from 'react';
 
 interface SocialContextType {
@@ -217,6 +215,7 @@ interface SocialContextType {
   updateLog: (id: string, updates: Partial<IA_Log>) => void;
   addTask: (task: Omit<IA_Task, 'id' | 'progress'>) => void;
   updateTask: (id: string, updates: Partial<IA_Task>) => void;
+  addAccount: (account: Omit<SocialAccount, 'id' | 'lastSync'>) => void;
 }
 
 const SocialContext = createContext<SocialContextType | undefined>(undefined);
@@ -229,6 +228,14 @@ export const SocialProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [media, setMedia] = useState<Media[]>(initialMedia);
   const [isLiveMode, setIsLiveMode] = useState(false);
+
+  const addAccount = (account: Omit<SocialAccount, 'id' | 'lastSync'>) => {
+    setAccounts([...accounts, {
+      ...account,
+      id: Math.random().toString(36).substring(7),
+      lastSync: new Date().toISOString()
+    }]);
+  };
 
   const addPost = (postData: Omit<Post, 'id' | 'status' | 'metrics'> & { status?: string }) => {
     const newPost: Post = {
@@ -280,7 +287,7 @@ export const SocialProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   return (
     <SocialContext.Provider value={{ 
       accounts, clients, logs, tasks, posts, media, isLiveMode, setIsLiveMode, 
-      addPost, updatePost, deletePost, updateClient, addLog, updateLog, addTask, updateTask 
+      addPost, updatePost, deletePost, updateClient, addLog, updateLog, addTask, updateTask, addAccount 
     }}>
       {children}
     </SocialContext.Provider>

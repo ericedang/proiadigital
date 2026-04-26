@@ -1,13 +1,17 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { useSocial, Media as MediaType } from './store';
 import { 
-  UploadCloud, Image as ImageIcon, Video, File, Search, Filter, MoreVertical, Folder, Grid, List as ListIcon
+  UploadCloud, Image as ImageIcon, Video, File, Search, Filter, MoreVertical, Folder, Grid, List as ListIcon, Loader2
 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Media() {
-  const { media } = useSocial();
+  // @ts-ignore
+  const { media, updatePost } = useSocial(); 
+  // We can't directly mutate media in this mock unless we add `addMedia` to store, but let's just use local state for uploaded files so we can simulate it easily
+  const [localMedia, setLocalMedia] = useState<MediaType[]>(media);
   const [view, setView] = useState<'grid' | 'list'>('grid');
+  const [isUploading, setIsUploading] = useState(false);
   
   const getIcon = (type: string) => {
     switch(type) {
@@ -15,6 +19,22 @@ export default function Media() {
       case 'image': return <ImageIcon className="w-5 h-5" />;
       default: return <File className="w-5 h-5" />;
     }
+  };
+
+  const handleSimulateUpload = () => {
+    setIsUploading(true);
+    setTimeout(() => {
+      setIsUploading(false);
+      const newM: MediaType = {
+        id: Math.random().toString(),
+        url: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80',
+        name: 'nouvelle_image_campagne.jpg',
+        type: 'image',
+        size: '1.2 MB',
+        date: new Date().toISOString()
+      };
+      setLocalMedia([newM, ...localMedia]);
+    }, 1500);
   };
 
   return (
@@ -30,8 +50,8 @@ export default function Media() {
             <Folder className="w-4 h-4" />
             Nouveau dossier
           </button>
-          <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2.5 rounded-xl font-medium transition-colors shadow-lg shadow-purple-500/30 flex items-center gap-2">
-            <UploadCloud className="w-5 h-5" />
+          <button onClick={handleSimulateUpload} disabled={isUploading} className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2.5 rounded-xl font-medium transition-colors shadow-lg shadow-purple-500/30 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+            {isUploading ? <Loader2 className="w-5 h-5 animate-spin" /> : <UploadCloud className="w-5 h-5" />}
             Importer
           </button>
         </div>
@@ -69,18 +89,18 @@ export default function Media() {
       </div>
 
       {/* Drop Zone */}
-      <div className="border-2 border-dashed border-white/20 hover:border-purple-500/50 hover:bg-purple-500/5 transition-all p-8 rounded-3xl flex flex-col items-center justify-center text-center cursor-pointer">
+      <div onClick={handleSimulateUpload} className="border-2 border-dashed border-white/20 hover:border-purple-500/50 hover:bg-purple-500/5 transition-all p-8 rounded-3xl flex flex-col items-center justify-center text-center cursor-pointer">
         <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-4 text-slate-300">
-          <UploadCloud className="w-8 h-8" />
+           {isUploading ? <Loader2 className="w-8 h-8 animate-spin" /> : <UploadCloud className="w-8 h-8" />}
         </div>
-        <h3 className="text-white font-bold text-lg mb-1">Glissez-déposez vos fichiers ici</h3>
+        <h3 className="text-white font-bold text-lg mb-1">{isUploading ? 'Téléchargement en cours...' : 'Glissez-déposez vos fichiers ici'}</h3>
         <p className="text-slate-400 text-sm">JPG, PNG, GIF, MP4 (Max. 50MB)</p>
       </div>
 
       {/* Grid View */}
       {view === 'grid' && (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-12">
-          {media.map(item => (
+          {localMedia.map(item => (
             <motion.div 
               key={item.id}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -90,7 +110,7 @@ export default function Media() {
               <div className="aspect-square relative flex items-center justify-center bg-slate-900/50 overflow-hidden">
                 <img src={item.url} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                  <button className="p-2 bg-white/20 hover:bg-purple-600 text-white rounded-xl backdrop-blur-md transition-colors">
+                  <button className="p-2 bg-white/20 hover:bg-purple-600 text-white rounded-xl backdrop-blur-md transition-colors font-medium px-4">
                     Sélectionner
                   </button>
                 </div>
@@ -127,10 +147,10 @@ export default function Media() {
               </tr>
             </thead>
             <tbody>
-              {media.map(item => (
+              {localMedia.map(item => (
                 <tr key={item.id} className="border-b border-white/5 hover:bg-white/10 transition-colors cursor-pointer group">
                   <td className="p-4 flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-slate-800 overflow-hidden shrink-0">
+                    <div className="w-12 h-12 rounded-lg bg-slate-800 overflow-hidden shrink-0 border border-white/10 group-hover:border-purple-500/50 transition-colors">
                       <img src={item.url} alt={item.name} className="w-full h-full object-cover" />
                     </div>
                     <span className="text-white text-sm font-medium">{item.name}</span>
