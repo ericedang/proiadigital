@@ -74,4 +74,9 @@
   animation: fadeInUp 0.5s ease-out;
 }
 
+input[type="date"],
+input[type="time"] {
+  color-scheme: dark;
+}
+
 /* MJ Commit */

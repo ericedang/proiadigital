@@ -3,11 +3,14 @@ import { useSocial, Post } from './store';
 import { ChevronLeft, ChevronRight, Plus, Sparkles, Wand2, ArrowRight } from 'lucide-react';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, eachDayOfInterval, isSameMonth, isSameDay } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import CreatePostModal from './CreatePostModal';
 
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isGenerating, setIsGenerating] = useState(false);
-  const { posts } = useSocial();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDateForModal, setSelectedDateForModal] = useState<Date | undefined>(undefined);
+  const { posts, addPost } = useSocial();
 
   const handlePrevMonth = () => setCurrentDate(subMonths(currentDate, 1));
   const handleNextMonth = () => setCurrentDate(addMonths(currentDate, 1));
@@ -39,7 +42,25 @@ export default function Calendar() {
 
   const simulateMagicGenerate = () => {
     setIsGenerating(true);
-    setTimeout(() => setIsGenerating(false), 2000);
+    setTimeout(() => {
+      setIsGenerating(false);
+      // Generate 3 sample AI posts in the current week
+      const d1 = new Date(); d1.setDate(d1.getDate() + 1); d1.setHours(11, 0, 0);
+      const d2 = new Date(); d2.setDate(d2.getDate() + 3); d2.setHours(18, 30, 0);
+      const d3 = new Date(); d3.setDate(d3.getDate() + 4); d3.setHours(9, 0, 0);
+      
+      const newPosts = [
+         { content: '🚀 L\'IA permet d\'automatiser 80% de votre activité...', platforms: ['linkedin'], scheduledDate: d1.toISOString(), status: 'ai-suggested' },
+         { content: 'Découvrez notre dernière étude sur le marché B2B 2026. 📊', platforms: ['twitter', 'linkedin'], scheduledDate: d2.toISOString(), status: 'ai-suggested' },
+         { content: 'Astuce du jour : Comment optimiser vos posts Instagram ? ✨', platforms: ['instagram'], scheduledDate: d3.toISOString(), status: 'ai-suggested' }
+      ];
+
+      newPosts.forEach(post => {
+         // @ts-ignore
+         addPost({ ...post, media: [] });
+      });
+
+    }, 2000);
   };
 
   const getBestTimeForDay = (day: Date) => {
@@ -103,7 +124,10 @@ export default function Calendar() {
             {isGenerating ? 'Génération...' : 'Magic Generate'}
           </button>
           
-          <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-xl font-medium transition-colors shadow-lg shadow-purple-500/30 flex items-center gap-2">
+          <button 
+            onClick={() => { setSelectedDateForModal(undefined); setIsModalOpen(true); }}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-xl font-medium transition-colors shadow-lg shadow-purple-500/30 flex items-center gap-2"
+          >
             <Plus className="w-5 h-5" />
             Nouveau
           </button>
@@ -172,7 +196,10 @@ export default function Calendar() {
                        </span>
                      )}
                   </div>
-                  <button className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-white transition-opacity">
+                  <button 
+                    onClick={() => { setSelectedDateForModal(day); setIsModalOpen(true); }}
+                    className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-white transition-opacity"
+                  >
                     <Plus className="w-4 h-4" />
                   </button>
                 </div>
@@ -203,6 +230,12 @@ export default function Calendar() {
           })}
         </div>
       </div>
+      
+      <CreatePostModal 
+         isOpen={isModalOpen} 
+         onClose={() => setIsModalOpen(false)} 
+         initialDate={selectedDateForModal} 
+      />
     </div>
   );
 }

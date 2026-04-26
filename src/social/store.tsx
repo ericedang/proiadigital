@@ -39,6 +39,7 @@ export interface IA_Log {
   timestamp: string;
   type: 'publish' | 'engage' | 'analyze' | 'warning' | 'crisis' | 'system';
   details?: string;
+  validationStatus?: 'pending' | 'approved' | 'rejected';
 }
 
 export interface Post {
@@ -206,10 +207,16 @@ interface SocialContextType {
   tasks: IA_Task[];
   posts: Post[];
   media: Media[];
+  isLiveMode: boolean;
+  setIsLiveMode: (live: boolean) => void;
   addPost: (post: Omit<Post, 'id' | 'status' | 'metrics'> & { status?: string }) => void;
   updatePost: (id: string, updates: Partial<Post>) => void;
   deletePost: (id: string) => void;
   updateClient: (id: string, updates: Partial<Client>) => void;
+  addLog: (log: Omit<IA_Log, 'id' | 'timestamp'>) => void;
+  updateLog: (id: string, updates: Partial<IA_Log>) => void;
+  addTask: (task: Omit<IA_Task, 'id' | 'progress'>) => void;
+  updateTask: (id: string, updates: Partial<IA_Task>) => void;
 }
 
 const SocialContext = createContext<SocialContextType | undefined>(undefined);
@@ -221,6 +228,7 @@ export const SocialProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [tasks, setTasks] = useState<IA_Task[]>(initialTasks);
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [media, setMedia] = useState<Media[]>(initialMedia);
+  const [isLiveMode, setIsLiveMode] = useState(false);
 
   const addPost = (postData: Omit<Post, 'id' | 'status' | 'metrics'> & { status?: string }) => {
     const newPost: Post = {
@@ -243,8 +251,37 @@ export const SocialProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     setClients(clients.map(c => c.id === id ? { ...c, ...updates } : c));
   };
 
+  const addLog = (logData: Omit<IA_Log, 'id' | 'timestamp'>) => {
+    const newLog: IA_Log = {
+      ...logData,
+      id: Math.random().toString(36).substring(7),
+      timestamp: new Date().toISOString(),
+    };
+    setLogs(prev => [newLog, ...prev]);
+  };
+
+  const updateLog = (id: string, updates: Partial<IA_Log>) => {
+    setLogs(prev => prev.map(l => l.id === id ? { ...l, ...updates } : l));
+  };
+
+  const addTask = (taskData: Omit<IA_Task, 'id' | 'progress'>) => {
+    const newTask: IA_Task = {
+      ...taskData,
+      id: Math.random().toString(36).substring(7),
+      progress: taskData.status === 'completed' ? 100 : 0,
+    };
+    setTasks(prev => [newTask, ...prev]);
+  };
+
+  const updateTask = (id: string, updates: Partial<IA_Task>) => {
+    setTasks(prev => prev.map(t => t.id === id ? { ...t, ...updates } : t));
+  };
+
   return (
-    <SocialContext.Provider value={{ accounts, clients, logs, tasks, posts, media, addPost, updatePost, deletePost, updateClient }}>
+    <SocialContext.Provider value={{ 
+      accounts, clients, logs, tasks, posts, media, isLiveMode, setIsLiveMode, 
+      addPost, updatePost, deletePost, updateClient, addLog, updateLog, addTask, updateTask 
+    }}>
       {children}
     </SocialContext.Provider>
   );
