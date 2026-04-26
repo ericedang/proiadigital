@@ -14,8 +14,8 @@ export default function Hero({ onOpenBooking }: HeroProps) {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=2070" 
-          alt="African Professional Team" 
+          src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=2070" 
+          alt="Équipe professionnelle camerounaise" 
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />

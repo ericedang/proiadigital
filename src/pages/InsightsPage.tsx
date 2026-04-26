@@ -9,19 +9,19 @@ const defaultArticles = [
     category: 'Économie',
     title: "Le développement économique de l'Afrique : Enjeux et perspectives pour 2026",
     date: '10 Avril 2026',
-    image: 'https://picsum.photos/seed/africa-economy/800/600',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800',
   },
   {
     category: 'Régional',
     title: 'Zone CEMAC : Vers une intégration par le partage des savoirs régionaux',
     date: '05 Avril 2026',
-    image: 'https://picsum.photos/seed/cemac/800/600',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800',
   },
   {
     category: 'Cameroun',
     title: "Le modèle camerounais : Analyse d'un développement basé sur la connaissance",
     date: '28 Mars 2026',
-    image: 'https://picsum.photos/seed/cameroon-dev/800/600',
+    image: 'https://images.unsplash.com/photo-1543336302-602ee50f9ffb?auto=format&fit=crop&q=80&w=800',
   },
 ];
 

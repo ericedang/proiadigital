@@ -55,6 +55,15 @@ export default function Navbar({ onOpenBooking, onOpenPayment }: NavbarProps) {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           <Link
+            to="/social"
+            className={cn(
+              "text-xs font-bold transition-all uppercase tracking-widest flex items-center gap-2 py-1 border-b-2",
+              activeRoute('/social') ? 'text-accent border-accent' : `${textColor} border-transparent hover:text-accent`
+            )}
+          >
+            Social SaaS
+          </Link>
+          <Link
             to="/boutique"
             className={cn(
               "text-xs font-bold transition-all uppercase tracking-widest flex items-center gap-2 py-1 border-b-2",

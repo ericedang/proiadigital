@@ -48,7 +48,7 @@ export default function AdminDashboard({ onClose }: { onClose: () => void }) {
     title: '',
     category: 'Économie',
     content: '',
-    image: 'https://picsum.photos/seed/article/800/600'
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800'
   });
 
   useEffect(() => {
@@ -106,7 +106,7 @@ export default function AdminDashboard({ onClose }: { onClose: () => void }) {
         title: '',
         category: 'Économie',
         content: '',
-        image: 'https://picsum.photos/seed/article/800/600'
+        image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800'
       });
       alert('Article publié avec succès !');
     } catch (error) {

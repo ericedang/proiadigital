@@ -3,22 +3,22 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Jean-Pierre Durand",
-    role: "CEO, TechCorp Solutions",
+    name: "Jean-Marcellin Nkou",
+    role: "CEO, TechCorp Douala",
     content: "L'accompagnement de Pro Digital a été déterminant dans notre transformation digitale. Leur expertise technique et stratégique est inégalée.",
-    image: "https://picsum.photos/seed/jp/100/100"
+    image: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80&w=100"
   },
   {
-    name: "Marie Lefebvre",
-    role: "Directrice Innovation, Global Retail",
-    content: "Une équipe à l'écoute qui comprend réellement les enjeux business. Les résultats sur nos processus internes sont impressionnants.",
-    image: "https://picsum.photos/seed/marie/100/100"
+    name: "Marie-Claire Engolo",
+    role: "Directrice Innovation, Retail CEMAC",
+    content: "Une équipe à l'écoute qui comprend réellement les enjeux du marché camerounais. Les résultats sur nos processus internes sont impressionnants.",
+    image: "https://images.unsplash.com/photo-1531123897727-8f129e1bf08c?auto=format&fit=crop&q=80&w=100"
   },
   {
-    name: "Marc Antoine",
+    name: "Marc Ewane",
     role: "Fondateur, Startup Vision",
-    content: "Plus qu'un cabinet de conseil, un véritable partenaire stratégique. Ils nous ont aidés à bâtir une infrastructure solide pour le futur.",
-    image: "https://picsum.photos/seed/marc/100/100"
+    content: "Plus qu'un cabinet de conseil, un véritable partenaire stratégique local. Ils nous ont aidés à bâtir une infrastructure solide pour le futur en Afrique centrale.",
+    image: "https://images.unsplash.com/photo-1605993439219-9d09d20b1fc2?auto=format&fit=crop&q=80&w=100"
   }
 ];
 

@@ -7,7 +7,7 @@ const services = [
     id: 'p3',
     title: "Formation",
     icon: GraduationCap,
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&q=80&w=800",
     desc: "Devenez le leader de demain. Maîtrisez les outils qui transforment les industries et pilotez vos projets avec assurance.",
     details: [
       { label: "Problème", content: "Manque de compétences internes pour piloter la transformation digitale.", color: "text-slate-400" },
@@ -19,7 +19,7 @@ const services = [
     id: 'p40',
     title: "Séminaires & Ateliers",
     icon: Users2,
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1531123897727-8f129e1bf08c?auto=format&fit=crop&q=80&w=800",
     desc: "Inspirez l'excellence collective. Résolvez vos problématiques complexes par la co-création et l'intelligence partagée.",
     details: [
       { label: "Problème", content: "Besoin de cohésion et de réflexion stratégique collective.", color: "text-slate-400" },
@@ -31,7 +31,7 @@ const services = [
     id: 'p11',
     title: "Web & Applications",
     icon: Globe,
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800",
     desc: "Ne soyez plus invisible. Attirez vos futurs partenaires avec une vitrine digitale qui reflète votre excellence.",
     details: [
       { label: "Problème", content: "Absence de présence en ligne ou outils numériques obsolètes.", color: "text-slate-400" },
@@ -43,7 +43,7 @@ const services = [
     id: 'p2',
     title: "Gestion & Comptabilité",
     icon: Calculator,
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1573167101669-476636b96ea6?auto=format&fit=crop&q=80&w=800",
     desc: "Prenez des décisions basées sur des chiffres réels. Maîtrisez votre santé financière pour une croissance sereine.",
     details: [
       { label: "Problème", content: "Complexité de la gestion comptable et manque de visibilité financière.", color: "text-slate-400" },
@@ -55,7 +55,7 @@ const services = [
     id: 'p6',
     title: "Marketing & Réseaux Sociaux",
     icon: Share2,
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1573165231977-3f0e27806045?auto=format&fit=crop&q=80&w=800",
     desc: "Créez un lien indéfectible avec votre audience. Transformez vos abonnés en ambassadeurs passionnés.",
     details: [
       { label: "Problème", content: "Faible engagement et manque de stratégie de contenu cohérente.", color: "text-slate-400" },
@@ -67,7 +67,7 @@ const services = [
     id: 'p21',
     title: "Organisation d'Événements",
     icon: Briefcase,
-    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1520607162513-32243d463870?auto=format&fit=crop&q=80&w=800",
     desc: "Marquez les esprits. Confiez-nous vos événements pour une exécution sans faille qui valorise votre image.",
     details: [
       { label: "Problème", content: "Difficultés de coordination et manque d'outils digitaux événementiels.", color: "text-slate-400" },
@@ -79,7 +79,7 @@ const services = [
     id: 'p25',
     title: "Automatisation des Processus",
     icon: Lightbulb,
-    image: "https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1573164574048-f968d7ee9f20?auto=format&fit=crop&q=80&w=800",
     desc: "Gagnez des heures de travail chaque semaine. Libérez votre potentiel en automatisant vos tâches répétitives.",
     details: [
       { label: "Problème", content: "Tâches répétitives et perte de temps opérationnel.", color: "text-slate-400" },
@@ -91,7 +91,7 @@ const services = [
     id: 'p37',
     title: "Savoir & Développement",
     icon: BookOpen,
-    image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=800",
     desc: "Réduisez l'incertitude. Obtenez des données terrain précises pour réussir votre implantation sur le continent.",
     details: [
       { label: "Problème", content: "Fragmentation des connaissances et modèles de développement inadaptés.", color: "text-slate-400" },
